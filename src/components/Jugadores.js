@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Global from '../Global'
 import axios from 'axios';
 import JugadorDetalle from './JugadorDetalle';
+import { NavLink } from 'react-router-dom';
 
 export default class Jugadores extends Component {
 
@@ -9,7 +10,6 @@ export default class Jugadores extends Component {
 
     state = {
         jugadores: [],
-        idJugador: 0
     }
 
     loadJugadores = () => {
@@ -23,12 +23,6 @@ export default class Jugadores extends Component {
 
     componentDidMount = () => {
         this.loadJugadores();
-    }
-
-    mostrarJugador = (id) => {
-        this.setState({
-            idJugador: id
-        })
     }
 
   render() {
@@ -50,19 +44,13 @@ export default class Jugadores extends Component {
                             <tr key={index}>
                                 <td>{jugador.nombre}</td>
                                 <td>{jugador.posicion}</td>
-                                <td><button onClick={ () => {
-                                    this.mostrarJugador(jugador.idJugador)
-                                }} className='btn btn-success'>Detalles</button></td>
+                                <td><NavLink to={"/jugador/" + jugador.idJugador} className='btn btn-success'>Detalles</NavLink></td>
                             </tr>
                         )
                     })
                 }
             </tbody>
         </table>
-        {
-            this.state.idJugador != 0 &&
-            <JugadorDetalle idjugador={this.state.idJugador}/>
-        }
       </div>
     )
   }

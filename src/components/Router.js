@@ -4,6 +4,7 @@ import Home from './Home'
 import Menu from './Menu'
 import Equipos from './Equipos'
 import Jugadores from './Jugadores'
+import JugadorDetalle from './JugadorDetalle'
 
 export default class Router extends Component {
   render() {
@@ -13,6 +14,11 @@ export default class Router extends Component {
         return(<Jugadores idequipo={idequipo}/>)
     }
 
+    function IdJugadorElement(){
+        let {idjugador} = useParams();
+        return(<JugadorDetalle idjugador={idjugador}/>)
+    }
+
     return (
       <BrowserRouter>
       <Menu />
@@ -20,6 +26,7 @@ export default class Router extends Component {
         <Route path='/' element={<Home/>}/>
         <Route path='/equipos' element={<Equipos/>} />
         <Route path='/jugadores/:idequipo' element={<JugadoresElement/>}/>
+        <Route path='/jugador/:idjugador' element={<IdJugadorElement/>}/>
       </Routes>
       </BrowserRouter>
     )
