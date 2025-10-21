@@ -23,6 +23,12 @@ export default class JugadorDetalle extends Component {
         this.loadJugador();
     }
 
+    componentDidUpdate = (oldProps) => {
+        if(oldProps.idjugador != this.props.idjugador){
+            this.loadJugador();
+        }
+    }
+
   render() {
     return (
         <div className="card" style={{width: "18rem"}}>
