@@ -5,6 +5,7 @@ import Menu from './Menu'
 import Equipos from './Equipos'
 import Jugadores from './Jugadores'
 import JugadorDetalle from './JugadorDetalle'
+import CreateEquipo from './CreateEquipo'
 
 export default class Router extends Component {
   render() {
@@ -27,6 +28,7 @@ export default class Router extends Component {
         <Route path='/equipos' element={<Equipos/>} />
         <Route path='/jugadores/:idequipo' element={<JugadoresElement/>}/>
         <Route path='/jugador/:idjugador' element={<IdJugadorElement/>}/>
+        <Route path='/crearequipo' element={<CreateEquipo/>} />
       </Routes>
       </BrowserRouter>
     )
