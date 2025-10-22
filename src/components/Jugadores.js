@@ -3,6 +3,7 @@ import Global from '../Global'
 import axios from 'axios';
 import JugadorDetalle from './JugadorDetalle';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default class Jugadores extends Component {
 
@@ -11,6 +12,8 @@ export default class Jugadores extends Component {
     state = {
         jugadores: [],
     }
+
+    botonEliminar = React.createRef();
 
     loadJugadores = () => {
         let request = "api/Jugadores/JugadoresEquipos/" + this.props.idequipo
@@ -23,6 +26,29 @@ export default class Jugadores extends Component {
 
     componentDidMount = () => {
         this.loadJugadores();
+    }
+
+    deleteJugador = () => {
+        Swal.fire({
+            icon: 'question',
+            title: '¿Desea eliminar al jugador?',
+            timer: 3000,
+            timerProgressBar: true,
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed){
+                let id = this.botonEliminar.current.value;
+                let request = "api/Jugadores/" + id
+                axios.delete(this.url + request).then(response=>{
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Jugador eliminado correctamente',
+                        timer: 3000,
+                        timerProgressBar: true
+                    })
+                })
+            }
+        }) 
     }
 
   render() {
@@ -44,7 +70,10 @@ export default class Jugadores extends Component {
                             <tr key={index}>
                                 <td>{jugador.nombre}</td>
                                 <td>{jugador.posicion}</td>
-                                <td><NavLink to={"/jugador/" + jugador.idJugador} className='btn btn-success'>Detalles</NavLink></td>
+                                <td>
+                                    <NavLink to={"/jugador/" + jugador.idJugador} className='btn btn-success me-2'>Detalles</NavLink>
+                                    <button onClick={this.deleteJugador} value={jugador.idJugador} ref={this.botonEliminar} className='btn btn-danger me-2'>Eliminar</button>
+                                </td>
                             </tr>
                         )
                     })
