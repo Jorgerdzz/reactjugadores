@@ -45,6 +45,8 @@ export default class Jugadores extends Component {
                         title: 'Jugador eliminado correctamente',
                         timer: 3000,
                         timerProgressBar: true
+                    }).then(()=>{
+                        this.loadJugadores();
                     })
                 })
             }
