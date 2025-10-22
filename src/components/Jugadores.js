@@ -4,6 +4,7 @@ import axios from 'axios';
 import JugadorDetalle from './JugadorDetalle';
 import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import TraspasarJugador from './TraspasarJugador';
 
 export default class Jugadores extends Component {
 
@@ -11,6 +12,7 @@ export default class Jugadores extends Component {
 
     state = {
         jugadores: [],
+        idJugador: 0,
     }
 
     botonEliminar = React.createRef();
@@ -53,6 +55,12 @@ export default class Jugadores extends Component {
         }) 
     }
 
+    traspasarJugador = (id) => {
+        this.setState({
+            idJugador: id
+        })
+    }
+
   render() {
     return (
       <div>
@@ -74,6 +82,7 @@ export default class Jugadores extends Component {
                                 <td>{jugador.posicion}</td>
                                 <td>
                                     <NavLink to={"/jugador/" + jugador.idJugador} className='btn btn-success me-2'>Detalles</NavLink>
+                                    <button onClick={()=>this.traspasarJugador(jugador.idJugador)} className='btn btn-warning me-2'>Traspasar</button>
                                     <button onClick={this.deleteJugador} value={jugador.idJugador} ref={this.botonEliminar} className='btn btn-danger me-2'>Eliminar</button>
                                 </td>
                             </tr>
@@ -82,6 +91,10 @@ export default class Jugadores extends Component {
                 }
             </tbody>
         </table>
+        {
+            this.state.idJugador != 0 &&
+            <TraspasarJugador idjugador={this.state.idJugador} loadjugadores={this.loadJugadores}/>
+        }
       </div>
     )
   }
