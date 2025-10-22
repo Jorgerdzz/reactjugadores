@@ -44,6 +44,7 @@ export default class Equipos extends Component {
                                         <p className="card-text">Champions: {equipo.champions}</p>
                                         <a href={equipo.web}>Sitio web</a><br></br>
                                         <NavLink to={"/jugadores/" + equipo.idEquipo} className="btn btn-primary d-grid mt-2">Ver jugadores</NavLink>
+                                        <NavLink to={"/createjugador/" + equipo.idEquipo} className="btn btn-warning d-grid mt-2">Añadir jugador</NavLink>
                                     </div>
                                 </div>
                             </div>

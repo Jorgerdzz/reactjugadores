@@ -18,9 +18,6 @@ export default class Menu extends Component {
             <li className="nav-item">
                 <NavLink className="nav-link" to={"/crearequipo"}>Crear equipo</NavLink>
             </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" to={"/"}>Crear jugador</NavLink>
-            </li>
         </ul>
         <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
