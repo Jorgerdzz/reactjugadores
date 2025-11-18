@@ -1,48 +1,68 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
-import Menu from './Menu'
-import Equipos from './Equipos'
-import Jugadores from './Jugadores'
-import JugadorDetalle from './JugadorDetalle'
-import CreateEquipo from './CreateEquipo'
-import CreateJugador from './CreateJugador'
-import BuscarJugadorNombre from './BuscarJugadorNombre'
+import React, { Component } from "react";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import Menu from "./Menu";
+import Equipos from "./Equipos";
+import Jugadores from "./Jugadores";
+import JugadorDetalle from "./JugadorDetalle";
+import CreateEquipo from "./CreateEquipo";
+import CreateJugador from "./CreateJugador";
+import BuscarJugadorNombre from "./BuscarJugadorNombre";
+import TraspasarJugador from "./TraspasarJugador";
 
 export default class Router extends Component {
   render() {
-
-    function JugadoresElement(){
-        let {idequipo} = useParams();
-        return(<Jugadores idequipo={idequipo}/>)
+    function JugadoresElement() {
+      let { idequipo } = useParams();
+      return <Jugadores idequipo={idequipo} />;
     }
 
-    function IdJugadorElement(){
-        let {idjugador} = useParams();
-        return(<JugadorDetalle idjugador={idjugador}/>)
+    function IdJugadorElement() {
+      let { idjugador } = useParams();
+      return <JugadorDetalle idjugador={idjugador} />;
     }
 
-    function AnadirJugadorElement(){
-      let {idequipo} = useParams();
-      return(<CreateJugador idequipo={idequipo}/>)
+    function AnadirJugadorElement() {
+      let { idequipo } = useParams();
+      return <CreateJugador idequipo={idequipo} />;
     }
 
-    function BuscarJugadorElement(){
-      let {nombre} = useParams();
-      return(<BuscarJugadorNombre nombre={nombre}/>)
+    function BuscarJugadorElement() {
+      let { nombre } = useParams();
+      return <BuscarJugadorNombre nombre={nombre} />;
+    }
+
+    function TraspasarJugadorElement() {
+      let { idjugador, idequipoorigen } = useParams();
+      return (
+        <TraspasarJugador
+          idjugador={idjugador}
+          idequipoorigen={idequipoorigen}
+        />
+      );
     }
 
     return (
       <BrowserRouter>
-      <Menu />
-      <Routes>
-        <Route path='/' element={<Equipos/>}/>
-        <Route path='/jugadores/:idequipo' element={<JugadoresElement/>}/>
-        <Route path='/jugador/:idjugador' element={<IdJugadorElement/>}/>
-        <Route path='/crearequipo' element={<CreateEquipo/>} />
-        <Route path='/createjugador/:idequipo' element={<AnadirJugadorElement/>}/>
-        <Route path='/buscarjugador/:nombre' element={<BuscarJugadorElement/>}/>
-      </Routes>
+        <Menu />
+        <Routes>
+          <Route path="/" element={<Equipos />} />
+          <Route path="/jugadores/:idequipo" element={<JugadoresElement />} />
+          <Route path="/jugador/:idjugador" element={<IdJugadorElement />} />
+          <Route path="/crearequipo" element={<CreateEquipo />} />
+          <Route
+            path="/createjugador/:idequipo"
+            element={<AnadirJugadorElement />}
+          />
+          <Route
+            path="/buscarjugador/:nombre"
+            element={<BuscarJugadorElement />}
+          />
+          <Route
+            path="/traspasarjugador/:idjugador/:idequipoorigen"
+            element={<TraspasarJugadorElement />}
+          />
+        </Routes>
       </BrowserRouter>
-    )
+    );
   }
 }
